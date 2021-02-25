@@ -3,7 +3,11 @@ import {Image, StyleSheet, TouchableOpacity, View} from 'react-native';
 
 import RegularText from '../regular-text/regular-text.component';
 import Icon from 'react-native-vector-icons/MaterialIcons';
-import {removeItemFromCart} from '../../redux/cart/cart.actions';
+import {
+  addItemToCart,
+  clearItemFromCart,
+  removeItemFromCart,
+} from '../../redux/cart/cart.actions';
 import {useDispatch} from 'react-redux';
 
 const RemoveButton = (props) => (
@@ -12,18 +16,43 @@ const RemoveButton = (props) => (
   </TouchableOpacity>
 );
 
+const IncreaseButton = (props) => (
+  <TouchableOpacity style={styles.increaseButton} {...props}>
+    <Icon name="keyboard-arrow-up" size={40} />
+  </TouchableOpacity>
+);
+
+const DecreaseButton = (props) => (
+  <TouchableOpacity style={styles.decreaseButton} {...props}>
+    <Icon name="keyboard-arrow-down" size={40} />
+  </TouchableOpacity>
+);
+
 const CartItem = ({item}) => {
   const {title, price, imageUrl, quantity} = item;
   const dispatch = useDispatch();
 
   const removeButtonHandler = () => {
+    dispatch(clearItemFromCart(item));
+  };
+
+  const increaseButtonHandler = () => {
+    dispatch(addItemToCart(item));
+  };
+
+  const decreaseButtonHandler = () => {
     dispatch(removeItemFromCart(item));
   };
 
   return (
     <View style={styles.cartItem}>
-      <RegularText style={styles.quantity}>{quantity}</RegularText>
-      <RegularText style={styles.quantityMark}>X</RegularText>
+      <View style={styles.quantityContainer}>
+        <IncreaseButton onPress={increaseButtonHandler} />
+        <View style={styles.quantityInfo}>
+          <RegularText style={styles.quantity}>{quantity}</RegularText>
+        </View>
+        <DecreaseButton onPress={decreaseButtonHandler} />
+      </View>
       <Image
         style={styles.image}
         source={{
@@ -44,20 +73,27 @@ const CartItem = ({item}) => {
 
 const styles = StyleSheet.create({
   cartItem: {
+    marginHorizontal: 5,
     marginTop: 20,
     borderRadius: 20,
     borderWidth: 1,
     flexDirection: 'row',
   },
   quantity: {
-    margin: 10,
-    fontSize: 50,
-    alignSelf: 'center',
-  },
-  quantityMark: {
     marginRight: 10,
-    alignSelf: 'center',
-    fontSize: 20,
+    fontSize: 35,
+    width: '100%',
+    textAlign: 'center',
+  },
+  quantityContainer: {
+    padding: 10,
+    flexWrap: 'wrap',
+    alignItems: 'center',
+  },
+  quantityInfo: {
+    position: 'relative',
+    flexDirection: 'row',
+    width: 50,
   },
   image: {
     height: 150,
@@ -71,6 +107,7 @@ const styles = StyleSheet.create({
   removeButton: {
     width: 50,
     height: 50,
+    justifyContent: 'center',
   },
   itemName: {
     fontSize: 16,
@@ -80,6 +117,14 @@ const styles = StyleSheet.create({
   },
   controls: {
     justifyContent: 'center',
+  },
+  increaseButton: {
+    width: '100%',
+    alignItems: 'center',
+  },
+  decreaseButton: {
+    width: '100%',
+    alignItems: 'center',
   },
 });
 
