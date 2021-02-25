@@ -1,6 +1,6 @@
 import {useRoute} from '@react-navigation/native';
 import React from 'react';
-import {View, Image, StyleSheet, Platform} from 'react-native';
+import {View, Image, StyleSheet, Platform, ScrollView} from 'react-native';
 import {useSelector} from 'react-redux';
 import {createProductsItemByIdSelector} from '../../redux/products/products.selectors';
 
@@ -16,7 +16,7 @@ const ItemDetails = () => {
   const {title, description, price, imageUrl} = item;
 
   return (
-    <View style={styles.itemDetails}>
+    <ScrollView contentContainerStyle={styles.itemDetails}>
       <View style={styles.imageContainer}>
         <Image
           source={{
@@ -38,7 +38,7 @@ const ItemDetails = () => {
       <View style={styles.priceContainer}>
         <RegularText style={[styles.text, styles.price]}>${price}</RegularText>
       </View>
-    </View>
+    </ScrollView>
   );
 };
 
