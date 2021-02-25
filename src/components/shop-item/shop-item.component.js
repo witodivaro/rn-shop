@@ -5,16 +5,23 @@ import {View, StyleSheet, TouchableOpacity, Image} from 'react-native';
 import RegularText from '../regular-text/regular-text.component';
 import SCREENS from '../../config/screens';
 import CustomButton from '../custom-button/custom-button.component';
+import {useDispatch} from 'react-redux';
+import {addItemToCart} from '../../redux/cart/cart.actions';
 
 const ShopItem = ({item}) => {
   const {id, title, imageUrl, price} = item;
   const navigation = useNavigation();
+  const dispatch = useDispatch();
 
   const navigateToDetailsHandler = () => {
     navigation.navigate(SCREENS.ItemDetails.name, {
       itemId: id,
       itemTitle: title,
     });
+  };
+
+  const addToCartHandler = () => {
+    dispatch(addItemToCart(item));
   };
 
   return (
@@ -39,7 +46,9 @@ const ShopItem = ({item}) => {
           <CustomButton onPress={navigateToDetailsHandler}>
             DETAILS
           </CustomButton>
-          <CustomButton green>ADD TO CART</CustomButton>
+          <CustomButton green onPress={addToCartHandler}>
+            ADD TO CART
+          </CustomButton>
         </View>
       </View>
     </View>
