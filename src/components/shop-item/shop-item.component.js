@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useRef} from 'react';
 import {View, Text, StyleSheet, TouchableOpacity, Image} from 'react-native';
 
 import CustomButton from '../custom-button/custom-button.component';
@@ -6,9 +6,15 @@ import CustomButton from '../custom-button/custom-button.component';
 const ShopItem = ({item}) => {
   const {title, imageUrl, price} = item;
 
+  const itemPressHandler = (e) => {
+    console.log(e.currentTarget.id);
+  };
+
   return (
     <View style={styles.item}>
-      <TouchableOpacity style={styles.imageContainer}>
+      <TouchableOpacity
+        style={styles.imageContainer}
+        onPress={itemPressHandler}>
         <Image
           source={{
             uri: imageUrl,

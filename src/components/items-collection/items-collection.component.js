@@ -14,7 +14,11 @@ const ItemsCollection = () => {
 
   return (
     <View style={styles.itemsCollection}>
-      <FlatList data={products} renderItem={renderShopItem} />
+      <FlatList
+        data={products}
+        renderItem={renderShopItem}
+        keyExtractor={(item) => item.id.toString()}
+      />
     </View>
   );
 };
