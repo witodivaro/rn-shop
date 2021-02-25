@@ -1,8 +1,10 @@
 import {useRoute} from '@react-navigation/native';
 import React from 'react';
-import {View, Image, StyleSheet, Text, Platform} from 'react-native';
+import {View, Image, StyleSheet, Platform} from 'react-native';
 import {useSelector} from 'react-redux';
 import {createProductsItemByIdSelector} from '../../redux/products/products.selectors';
+
+import RegularText from '../../components/regular-text/regular-text.component';
 
 import CustomButton from '../../components/custom-button/custom-button.component';
 
@@ -24,17 +26,17 @@ const ItemDetails = () => {
         />
       </View>
       <View style={styles.titleContainer}>
-        <Text style={styles.title}>{title}</Text>
+        <RegularText style={styles.title}>{title}</RegularText>
       </View>
       <View style={styles.textContainer}>
-        <Text style={styles.subtitle}>Description</Text>
-        <Text style={styles.text}>{description}</Text>
+        <RegularText style={styles.subtitle}>Description</RegularText>
+        <RegularText style={styles.text}>{description}</RegularText>
       </View>
       <View style={styles.buttonsContainer}>
         <CustomButton green>ADD TO CART</CustomButton>
       </View>
       <View style={styles.priceContainer}>
-        <Text style={[styles.text, styles.price]}>${price}</Text>
+        <RegularText style={[styles.text, styles.price]}>${price}</RegularText>
       </View>
     </View>
   );
@@ -75,6 +77,7 @@ const styles = StyleSheet.create({
   text: {
     fontSize: 16,
     textAlign: 'justify',
+    fontFamily: 'Montserrat-Regular',
   },
   textContainer: {
     marginTop: 10,
@@ -93,6 +96,11 @@ const styles = StyleSheet.create({
   },
   price: {
     fontSize: 20,
+    textShadowRadius: Platform.select({
+      ios: 1,
+      default: 2,
+    }),
+    textShadowColor: '#73a657',
   },
 });
 

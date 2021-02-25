@@ -1,7 +1,8 @@
 import {useNavigation} from '@react-navigation/native';
 import React from 'react';
-import {View, Text, StyleSheet, TouchableOpacity, Image} from 'react-native';
+import {View, StyleSheet, TouchableOpacity, Image} from 'react-native';
 
+import RegularText from '../regular-text/regular-text.component';
 import SCREENS from '../../config/screens';
 import CustomButton from '../custom-button/custom-button.component';
 
@@ -31,8 +32,8 @@ const ShopItem = ({item}) => {
       </TouchableOpacity>
       <View style={styles.details}>
         <View style={styles.info}>
-          <Text style={styles.title}>{title}</Text>
-          <Text style={styles.price}>${price}</Text>
+          <RegularText style={styles.title}>{title}</RegularText>
+          <RegularText style={styles.price}>${price}</RegularText>
         </View>
         <View style={styles.controls}>
           <CustomButton onPress={navigateToDetailsHandler}>

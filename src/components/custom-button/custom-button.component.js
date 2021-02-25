@@ -1,5 +1,7 @@
 import React from 'react';
-import {TouchableOpacity, Text, StyleSheet} from 'react-native';
+import {TouchableOpacity, StyleSheet} from 'react-native';
+
+import RegularText from '../regular-text/regular-text.component';
 
 const CustomButton = ({green, style, children, ...otherProps}) => {
   const styleProps = {green};
@@ -8,7 +10,9 @@ const CustomButton = ({green, style, children, ...otherProps}) => {
     <TouchableOpacity
       style={[styles.button, getButtonStyling(styleProps)]}
       {...otherProps}>
-      <Text style={[styles.text, getTextStyling(styleProps)]}>{children}</Text>
+      <RegularText style={[styles.text, getTextStyling(styleProps)]}>
+        {children}
+      </RegularText>
     </TouchableOpacity>
   );
 };
