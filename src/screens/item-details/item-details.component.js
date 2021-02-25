@@ -1,6 +1,6 @@
 import {useRoute} from '@react-navigation/native';
 import React from 'react';
-import {View, Image, StyleSheet, Text} from 'react-native';
+import {View, Image, StyleSheet, Text, Platform} from 'react-native';
 import {useSelector} from 'react-redux';
 import {createProductsItemByIdSelector} from '../../redux/products/products.selectors';
 
@@ -23,8 +23,8 @@ const ItemDetails = () => {
           style={styles.image}
         />
       </View>
-      <View style={styles.textContainer}>
-        <Text style={styles.subtitle}>{title}</Text>
+      <View style={styles.titleContainer}>
+        <Text style={styles.title}>{title}</Text>
       </View>
       <View style={styles.textContainer}>
         <Text style={styles.subtitle}>Description</Text>
@@ -51,6 +51,19 @@ const styles = StyleSheet.create({
   imageContainer: {
     width: '100%',
   },
+  title: {
+    fontSize: 18,
+    textShadowRadius: Platform.select({
+      ios: 3,
+      default: 5,
+    }),
+    textShadowColor: 'black',
+  },
+  titleContainer: {
+    width: '100%',
+    marginTop: 30,
+    alignItems: 'center',
+  },
   image: {
     height: 200,
   },
@@ -66,6 +79,10 @@ const styles = StyleSheet.create({
   textContainer: {
     marginTop: 10,
     alignItems: 'flex-start',
+    padding: 10,
+    borderWidth: 1,
+    borderRadius: 20,
+    backgroundColor: '#eee',
   },
   subtitle: {
     marginVertical: 10,
