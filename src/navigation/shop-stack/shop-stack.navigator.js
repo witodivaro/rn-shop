@@ -32,6 +32,11 @@ const ShopStackNavigator = () => {
           title: route.params.itemTitle,
         })}
       />
+      <ShopStack.Screen
+        key={SCREENS.Cart.key}
+        name={SCREENS.Cart.name}
+        component={SCREENS.Cart.component}
+      />
     </ShopStack.Navigator>
   );
 };
