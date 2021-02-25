@@ -12,7 +12,17 @@ const ShopStackNavigator = () => {
   const navigation = useNavigation();
 
   return (
-    <ShopStack.Navigator initialRouteName={SCREENS.Home.name}>
+    <ShopStack.Navigator
+      initialRouteName={SCREENS.Home.name}
+      screenOptions={{
+        headerRight: () => (
+          <CartHeaderButton
+            onPress={() => {
+              navigation.navigate(SCREENS.Cart.name);
+            }}
+          />
+        ),
+      }}>
       <ShopStack.Screen
         key={SCREENS.Home.key}
         name={SCREENS.Home.name}
@@ -21,7 +31,6 @@ const ShopStackNavigator = () => {
           headerLeft: () => (
             <MenuHeaderButton onPress={() => navigation.toggleDrawer()} />
           ),
-          headerRight: () => <CartHeaderButton onPress={() => {}} />,
         }}
       />
       <ShopStack.Screen
