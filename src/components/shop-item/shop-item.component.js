@@ -41,11 +41,13 @@ const styles = StyleSheet.create({
       height: 2,
       width: 0,
     },
-    elevation: 5,
   },
-  imageContainer: {},
+  imageContainer: {
+    elevation: 6,
+  },
   image: {
     height: 200,
+    borderRadius: 10,
   },
   info: {
     flexDirection: 'row',
@@ -55,6 +57,8 @@ const styles = StyleSheet.create({
     padding: 10,
     marginTop: 10,
     backgroundColor: '#ccc',
+    elevation: 6,
+    borderRadius: 10,
   },
   title: {
     color: '#111',

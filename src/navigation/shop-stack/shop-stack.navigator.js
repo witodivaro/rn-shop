@@ -12,6 +12,9 @@ const ShopStackNavigator = () => {
         key={SCREENS.Home.key}
         name={SCREENS.Home.name}
         component={SCREENS.Home.component}
+        options={{
+          headerLeft: () => {},
+        }}
       />
     </ShopStack.Navigator>
   );
