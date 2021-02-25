@@ -2,7 +2,7 @@ import React from 'react';
 import {View, FlatList, StyleSheet} from 'react-native';
 import {useSelector} from 'react-redux';
 
-import {selectProductsItems} from '../../redux/products/products.selectors';
+import {selectProductsItemsArray} from '../../redux/products/products.selectors';
 
 import ShopItem from '../shop-item/shop-item.component';
 
@@ -10,7 +10,7 @@ const renderShopItem = ({item}) => {
   return <ShopItem item={item} />;
 };
 const ItemsCollection = () => {
-  const products = useSelector(selectProductsItems);
+  const products = useSelector(selectProductsItemsArray);
 
   return (
     <View style={styles.itemsCollection}>

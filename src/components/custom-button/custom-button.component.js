@@ -1,7 +1,7 @@
 import React from 'react';
 import {TouchableOpacity, Text, StyleSheet} from 'react-native';
 
-const CustomButton = ({green, children, ...otherProps}) => {
+const CustomButton = ({green, style, children, ...otherProps}) => {
   const styleProps = {green};
 
   return (

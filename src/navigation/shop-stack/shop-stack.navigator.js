@@ -1,5 +1,5 @@
 import React from 'react';
-import {createStackNavigator, HeaderBackButton} from '@react-navigation/stack';
+import {createStackNavigator} from '@react-navigation/stack';
 
 import SCREENS from '../../config/screens';
 import MenuHeaderButton from '../../components/menu-header-button/menu-header-button.component';
@@ -21,8 +21,16 @@ const ShopStackNavigator = () => {
           headerLeft: () => (
             <MenuHeaderButton onPress={() => navigation.toggleDrawer()} />
           ),
-          headerRight: () => <CartHeaderButton />,
+          headerRight: () => <CartHeaderButton onPress={() => {}} />,
         }}
+      />
+      <ShopStack.Screen
+        key={SCREENS.ItemDetails.key}
+        name={SCREENS.ItemDetails.name}
+        component={SCREENS.ItemDetails.component}
+        options={({route}) => ({
+          title: route.params.itemTitle,
+        })}
       />
     </ShopStack.Navigator>
   );

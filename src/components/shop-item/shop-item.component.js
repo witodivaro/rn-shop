@@ -1,18 +1,26 @@
+import {useNavigation} from '@react-navigation/native';
 import React from 'react';
 import {View, Text, StyleSheet, TouchableOpacity, Image} from 'react-native';
 
+import SCREENS from '../../config/screens';
 import CustomButton from '../custom-button/custom-button.component';
 
 const ShopItem = ({item}) => {
-  const {title, imageUrl, price} = item;
+  const {id, title, imageUrl, price} = item;
+  const navigation = useNavigation();
 
-  const itemPressHandler = () => {};
+  const navigateToDetailsHandler = () => {
+    navigation.navigate(SCREENS.ItemDetails.name, {
+      itemId: id,
+      itemTitle: title,
+    });
+  };
 
   return (
     <View style={styles.item}>
       <TouchableOpacity
         style={styles.imageContainer}
-        onPress={itemPressHandler}>
+        onPress={navigateToDetailsHandler}>
         <Image
           source={{
             uri: imageUrl,
@@ -27,7 +35,9 @@ const ShopItem = ({item}) => {
           <Text style={styles.price}>${price}</Text>
         </View>
         <View style={styles.controls}>
-          <CustomButton>DETAILS</CustomButton>
+          <CustomButton onPress={navigateToDetailsHandler}>
+            DETAILS
+          </CustomButton>
           <CustomButton green>ADD TO CART</CustomButton>
         </View>
       </View>
