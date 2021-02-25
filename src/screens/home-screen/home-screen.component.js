@@ -1,18 +1,18 @@
 import React from 'react';
-import {View, Text, StyleSheet} from 'react-native';
+import {StyleSheet, View} from 'react-native';
+
+import ItemsCollection from '../../components/items-collection/items-collection.component';
 
 const HomeScreen = () => {
   return (
     <View style={styles.screen}>
-      <Text>Home screen</Text>
+      <ItemsCollection />
     </View>
   );
 };
 
 const styles = StyleSheet.create({
   screen: {
-    justifyContent: 'center',
-    alignItems: 'center',
     flex: 1,
   },
 });

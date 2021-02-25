@@ -1,7 +1,7 @@
 import HomeScreen from '../screens/home-screen/home-screen.component';
 
 const SCREENS = {
-  home: {
+  Home: {
     name: 'Home',
     key: 'homeScreen',
     component: HomeScreen,

@@ -1,7 +1,7 @@
 import React from 'react';
 import {SafeAreaView, StyleSheet, Text} from 'react-native';
 
-import DrawerNavigator from './src/navigation/drawer/drawer-navigator.js';
+import DrawerNavigator from './src/navigation/drawer/drawer.navigator.js';
 
 const App = () => {
   return (
