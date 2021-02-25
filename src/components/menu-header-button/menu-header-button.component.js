@@ -8,7 +8,7 @@ import {
 
 import MaterialHeaderButton from '../material-header-button/material-header-button.component';
 
-const MenuHeaderButton = ({navigation}) => {
+const MenuHeaderButton = (props) => {
   return (
     <HeaderButtons HeaderButtonComponent={MaterialHeaderButton}>
       <Item
@@ -16,7 +16,7 @@ const MenuHeaderButton = ({navigation}) => {
         iconName="menu"
         iconSize={23}
         color="black"
-        onPress={() => navigation.toggleDrawer()}
+        {...props}
       />
     </HeaderButtons>
   );
