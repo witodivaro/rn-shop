@@ -4,8 +4,16 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 
 import RegularText from '../regular-text/regular-text.component';
 
-const CustomButton = ({green, red, icon, style, children, ...otherProps}) => {
-  const styleProps = {green, red};
+const CustomButton = ({
+  green,
+  red,
+  orange,
+  icon,
+  style,
+  children,
+  ...otherProps
+}) => {
+  const styleProps = {green, red, orange};
 
   const renderedIcon = icon ? (
     <Icon
@@ -28,7 +36,7 @@ const CustomButton = ({green, red, icon, style, children, ...otherProps}) => {
   );
 };
 
-const getButtonStyling = ({green, red}) => {
+const getButtonStyling = ({green, red, orange}) => {
   if (green)
     return {
       backgroundColor: '#73a657',
@@ -41,13 +49,19 @@ const getButtonStyling = ({green, red}) => {
       borderColor: '#c21807',
     };
 
+  if (orange)
+    return {
+      backgroundColor: '#fd6a02',
+      borderColor: '#fd6a02',
+    };
+
   return {
     borderColor: '#444',
   };
 };
 
-const getTextStyling = ({green, red}) => {
-  if (green || red)
+const getTextStyling = ({green, red, orange}) => {
+  if (green || red || orange)
     return {
       color: 'white',
     };
@@ -57,8 +71,8 @@ const getTextStyling = ({green, red}) => {
   };
 };
 
-const getIconColor = ({green, red}) => {
-  if (green || red) return 'white';
+const getIconColor = ({green, red, orange}) => {
+  if (green || red || orange) return 'white';
 
   return 'black';
 };
