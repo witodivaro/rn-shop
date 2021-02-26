@@ -1,6 +1,6 @@
 import UserActionTypes from './user.types';
 
-export const addUserOrder = (order) => ({
+export const addUserOrder = ({total, date, items}) => ({
   type: UserActionTypes.ADD_ORDER,
-  payload: order,
+  payload: {total, date, items},
 });

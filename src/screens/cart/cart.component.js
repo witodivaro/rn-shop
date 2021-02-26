@@ -1,21 +1,46 @@
 import React from 'react';
+import {useState} from 'react';
 import {StyleSheet, View} from 'react-native';
 import {FlatList} from 'react-native-gesture-handler';
-import {useSelector} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import CartItem from '../../components/cart-item/cart-item.component';
 import CustomButton from '../../components/custom-button/custom-button.component';
+import CenteredModal from '../../components/centered-modal/centered-modal';
 
 import RegularText from '../../components/regular-text/regular-text.component';
 import {
   selectCartItems,
   selectCartItemsPrice,
 } from '../../redux/cart/cart.selectors';
+import {addUserOrder} from '../../redux/user/user.actions';
+import {clearCart} from '../../redux/cart/cart.actions';
+import {useMemo} from 'react';
 
 const renderCartItem = ({item}) => <CartItem item={item} />;
 
 const CartScreen = () => {
   const cartItems = useSelector(selectCartItems);
   const cartItemsPrice = useSelector(selectCartItemsPrice);
+  const dispatch = useDispatch();
+  const [isOrderModalShown, setIsOrderModalShown] = useState(false);
+
+  const openOrderModalHandler = () => {
+    setIsOrderModalShown((isOrderModalShown) => !isOrderModalShown);
+  };
+
+  const closeModalHandler = () => {
+    setIsOrderModalShown(false);
+  };
+
+  const orderHandler = () => {
+    const now = new Date();
+    dispatch(
+      addUserOrder({total: cartItemsPrice, items: cartItems, date: now}),
+    );
+    setIsOrderModalShown(false);
+    dispatch(clearCart());
+    alert('Order success!');
+  };
 
   const renderedCartHeader = (
     <View style={styles.cartHeader}>
@@ -24,7 +49,9 @@ const CartScreen = () => {
           <RegularText style={styles.price}>
             TOTAL PRICE: ${cartItemsPrice}
           </RegularText>
-          <CustomButton orange>ORDER</CustomButton>
+          <CustomButton orange onPress={openOrderModalHandler}>
+            ORDER
+          </CustomButton>
         </>
       ) : (
         <RegularText style={styles.emptyMessage}>
@@ -32,6 +59,33 @@ const CartScreen = () => {
         </RegularText>
       )}
     </View>
+  );
+
+  const renderedOrderModal = useMemo(
+    () => (
+      <CenteredModal
+        visible={isOrderModalShown}
+        setVisible={setIsOrderModalShown}>
+        <View style={styles.orderModal}>
+          <RegularText style={styles.modalPriceTitle}>
+            Total price is:{' '}
+          </RegularText>
+          <RegularText style={styles.modalPrice}>${cartItemsPrice}</RegularText>
+          <View style={styles.modalControls}>
+            <CustomButton
+              style={styles.modalButton}
+              green
+              onPress={orderHandler}>
+              ORDER
+            </CustomButton>
+            <CustomButton red onPress={closeModalHandler}>
+              CANCEL
+            </CustomButton>
+          </View>
+        </View>
+      </CenteredModal>
+    ),
+    [isOrderModalShown, cartItemsPrice, orderHandler, closeModalHandler],
   );
 
   return (
@@ -42,6 +96,7 @@ const CartScreen = () => {
         data={cartItems}
         renderItem={renderCartItem}
       />
+      {renderedOrderModal}
     </View>
   );
 };
@@ -65,8 +120,29 @@ const styles = StyleSheet.create({
     fontSize: 18,
   },
   emptyMessage: {
-    alignSelf: 'center',
+    width: '100%',
+    textAlign: 'center',
     fontSize: 20,
+  },
+  orderModal: {
+    backgroundColor: '#eee',
+    alignItems: 'center',
+    padding: 20,
+  },
+  modalPriceTitle: {
+    fontSize: 18,
+  },
+  modalPrice: {
+    fontSize: 20,
+    textShadowColor: 'black',
+    textShadowRadius: 3,
+  },
+  modalControls: {
+    marginTop: 20,
+    flexDirection: 'row',
+  },
+  modalButton: {
+    marginRight: 20,
   },
 });
 

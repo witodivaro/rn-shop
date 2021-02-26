@@ -26,7 +26,7 @@ const CustomButton = ({
 
   return (
     <TouchableOpacity
-      style={[styles.button, getButtonStyling(styleProps)]}
+      style={[styles.button, getButtonStyling(styleProps), style]}
       {...otherProps}>
       {renderedIcon}
       <RegularText style={[styles.text, getTextStyling(styleProps)]}>
