@@ -6,17 +6,18 @@ import {selectProductsItemsArray} from '../../redux/products/products.selectors'
 
 import ShopItem from '../shop-item/shop-item.component';
 
-const renderShopItem = ({item}) => {
-  return <ShopItem item={item} />;
+const renderShopItem = (item, editable) => {
+  return <ShopItem item={item} editable={editable} />;
 };
-const ItemsCollection = () => {
+
+const ItemsCollection = ({editable}) => {
   const products = useSelector(selectProductsItemsArray);
 
   return (
     <View style={styles.itemsCollection}>
       <FlatList
         data={products}
-        renderItem={renderShopItem}
+        renderItem={({item}) => renderShopItem(item, editable)}
         keyExtractor={(item) => item.id.toString()}
       />
     </View>

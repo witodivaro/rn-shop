@@ -1,6 +1,8 @@
 import CartScreen from '../screens/cart/cart.component';
+import EditProductScreen from '../screens/edit-product/edit-product.component';
 import HomeScreen from '../screens/home/home.component';
 import ItemDetailsScreen from '../screens/item-details/item-details.component';
+import ManageProductsScreen from '../screens/manage-products/manage-products.component';
 import OrdersScreen from '../screens/orders/orders.component';
 
 const SCREENS = {
@@ -23,6 +25,16 @@ const SCREENS = {
     name: 'Orders',
     key: 'orders',
     component: OrdersScreen,
+  },
+  ManageProducts: {
+    name: 'ManageProducts',
+    key: 'manageProducts',
+    component: ManageProductsScreen,
+  },
+  EditProduct: {
+    name: 'EditProduct',
+    key: 'editProduct',
+    component: EditProductScreen,
   },
 };
 

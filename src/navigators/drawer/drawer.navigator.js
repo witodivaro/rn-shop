@@ -26,6 +26,14 @@ const DrawerNavigator = () => {
           title: 'Orders',
         }}
       />
+      <Drawer.Screen
+        name={STACK_NAVIGATORS.Admin.name}
+        key={STACK_NAVIGATORS.Admin.key}
+        component={STACK_NAVIGATORS.Admin.component}
+        options={{
+          title: 'Manage products',
+        }}
+      />
     </Drawer.Navigator>
   );
 };

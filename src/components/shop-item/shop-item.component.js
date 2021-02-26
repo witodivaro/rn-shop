@@ -10,7 +10,7 @@ import {addItemToCart, clearItemFromCart} from '../../redux/cart/cart.actions';
 import {createIsItemInCartSelector} from '../../redux/cart/cart.selectors';
 import {useMemo} from 'react';
 
-const ShopItem = ({item}) => {
+const ShopItem = ({item, editable}) => {
   const {id, title, imageUrl, price} = item;
   const navigation = useNavigation();
   const dispatch = useDispatch();
@@ -31,6 +31,14 @@ const ShopItem = ({item}) => {
     dispatch(clearItemFromCart(item));
   };
 
+  const editHandler = () => {
+    navigation.navigate(SCREENS.EditProduct.name, {
+      itemId: id,
+    });
+  };
+
+  const deleteHandler = () => {};
+
   const renderedCartButton = useMemo(
     () =>
       isItemInCart ? (
@@ -43,6 +51,28 @@ const ShopItem = ({item}) => {
         </CustomButton>
       ),
     [item, isItemInCart],
+  );
+
+  const renderedControls = (
+    <View style={styles.controls}>
+      {editable ? (
+        <>
+          <CustomButton green onPress={editHandler}>
+            EDIT
+          </CustomButton>
+          <CustomButton red onPress={deleteHandler}>
+            DELETE
+          </CustomButton>
+        </>
+      ) : (
+        <>
+          <CustomButton onPress={navigateToDetailsHandler}>
+            DETAILS
+          </CustomButton>
+          {renderedCartButton}
+        </>
+      )}
+    </View>
   );
 
   return (
@@ -63,12 +93,7 @@ const ShopItem = ({item}) => {
           <RegularText style={styles.title}>{title}</RegularText>
           <RegularText style={styles.price}>${price}</RegularText>
         </View>
-        <View style={styles.controls}>
-          <CustomButton onPress={navigateToDetailsHandler}>
-            DETAILS
-          </CustomButton>
-          {renderedCartButton}
-        </View>
+        {renderedControls}
       </View>
     </View>
   );

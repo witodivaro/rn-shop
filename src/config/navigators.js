@@ -1,5 +1,6 @@
-import OrdersStackNavigator from '../navigation/orders-stack/orders-stack.navigator';
-import ShopStackNavigator from '../navigation/shop-stack/shop-stack.navigator';
+import AdminStackNavigator from '../navigators/admin-stack/admin-stack.navigator';
+import OrdersStackNavigator from '../navigators/orders-stack/orders-stack.navigator';
+import ShopStackNavigator from '../navigators/shop-stack/shop-stack.navigator';
 
 export const STACK_NAVIGATORS = {
   Shop: {
@@ -11,5 +12,10 @@ export const STACK_NAVIGATORS = {
     component: OrdersStackNavigator,
     name: 'orders-stack',
     key: 'orders-stack',
+  },
+  Admin: {
+    component: AdminStackNavigator,
+    name: 'admin-stack',
+    key: 'admin-stack',
   },
 };
