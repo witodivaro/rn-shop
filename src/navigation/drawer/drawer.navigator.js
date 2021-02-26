@@ -18,6 +18,14 @@ const DrawerNavigator = () => {
           title: 'Shop',
         }}
       />
+      <Drawer.Screen
+        name={STACK_NAVIGATORS.Orders.name}
+        key={STACK_NAVIGATORS.Orders.key}
+        component={STACK_NAVIGATORS.Orders.component}
+        options={{
+          title: 'Orders',
+        }}
+      />
     </Drawer.Navigator>
   );
 };

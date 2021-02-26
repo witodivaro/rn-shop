@@ -1,6 +1,7 @@
 import CartScreen from '../screens/cart/cart.component';
 import HomeScreen from '../screens/home/home.component';
 import ItemDetailsScreen from '../screens/item-details/item-details.component';
+import OrdersScreen from '../screens/orders/orders.component';
 
 const SCREENS = {
   Home: {
@@ -17,6 +18,11 @@ const SCREENS = {
     name: 'Cart',
     key: 'cart',
     component: CartScreen,
+  },
+  Orders: {
+    name: 'Orders',
+    key: 'orders',
+    component: OrdersScreen,
   },
 };
 
