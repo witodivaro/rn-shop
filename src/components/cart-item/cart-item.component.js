@@ -80,6 +80,7 @@ const CartItem = ({item}) => {
       <View style={styles.details}>
         <RegularText style={styles.itemName}>{title}</RegularText>
         <RegularText style={styles.price}>$ {price}</RegularText>
+        <RegularText style={styles.subprice}>$ {price * quantity}</RegularText>
       </View>
       <View style={styles.controls}>
         <RemoveButton onPress={removeButtonHandler} />
@@ -119,7 +120,6 @@ const styles = StyleSheet.create({
   details: {
     padding: 10,
     width: '40%',
-    justifyContent: 'space-around',
   },
   removeButton: {
     width: 50,
@@ -130,7 +130,12 @@ const styles = StyleSheet.create({
     fontSize: 16,
   },
   price: {
+    marginTop: 'auto',
+    marginLeft: 'auto',
     fontSize: 40,
+  },
+  subprice: {
+    marginLeft: 'auto',
   },
   controls: {
     justifyContent: 'center',
