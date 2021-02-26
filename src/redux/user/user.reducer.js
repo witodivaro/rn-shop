@@ -1,4 +1,5 @@
 import UserActionTypes from './user.types';
+import {identifyOrder} from './user.utils';
 
 const initialState = {
   orders: [],
@@ -9,7 +10,7 @@ const userReducer = (state = initialState, {type, payload}) => {
     case UserActionTypes.ADD_ORDER:
       return {
         ...state,
-        orders: [...state.orders, payload],
+        orders: [...state.orders, identifyOrder(payload)],
       };
 
     default:

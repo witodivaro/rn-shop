@@ -15,6 +15,8 @@ import {
 import {addUserOrder} from '../../redux/user/user.actions';
 import {clearCart} from '../../redux/cart/cart.actions';
 import {useMemo} from 'react';
+import {useNavigation} from '@react-navigation/native';
+import {STACK_NAVIGATORS} from '../../config/navigators';
 
 const renderCartItem = ({item}) => <CartItem item={item} />;
 
@@ -22,6 +24,7 @@ const CartScreen = () => {
   const cartItems = useSelector(selectCartItems);
   const cartItemsPrice = useSelector(selectCartItemsPrice);
   const dispatch = useDispatch();
+  const navigation = useNavigation();
   const [isOrderModalShown, setIsOrderModalShown] = useState(false);
 
   const openOrderModalHandler = () => {
@@ -39,7 +42,10 @@ const CartScreen = () => {
     );
     setIsOrderModalShown(false);
     dispatch(clearCart());
-    alert('Order success!');
+    navigation.reset({
+      index: 0,
+      routes: [{name: STACK_NAVIGATORS.Orders.name}],
+    });
   };
 
   const renderedCartHeader = (
