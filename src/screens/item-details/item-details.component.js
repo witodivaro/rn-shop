@@ -1,19 +1,50 @@
 import {useRoute} from '@react-navigation/native';
 import React from 'react';
 import {View, Image, StyleSheet, Platform, ScrollView} from 'react-native';
-import {useSelector} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import {createProductsItemByIdSelector} from '../../redux/products/products.selectors';
 
 import RegularText from '../../components/regular-text/regular-text.component';
 
 import CustomButton from '../../components/custom-button/custom-button.component';
+import {addItemToCart, clearItemFromCart} from '../../redux/cart/cart.actions';
+import {createIsItemInCartSelector} from '../../redux/cart/cart.selectors';
+import {useMemo} from 'react';
+import Icon from 'react-native-vector-icons/MaterialIcons';
 
 const ItemDetails = () => {
   const route = useRoute();
+  const dispatch = useDispatch();
   const itemId = route.params.itemId;
   const item = useSelector(createProductsItemByIdSelector(itemId));
+  const itemInCart = useSelector(createIsItemInCartSelector(itemId));
 
   const {title, description, price, imageUrl} = item;
+
+  const addToCartHandler = () => {
+    dispatch(addItemToCart(item));
+  };
+
+  const removeFromCartHandler = () => {
+    dispatch(clearItemFromCart(item));
+  };
+
+  const renderedCartButton = useMemo(
+    () =>
+      itemInCart ? (
+        <CustomButton green icon="check-circle" onPress={removeFromCartHandler}>
+          ITEM ADDED
+        </CustomButton>
+      ) : (
+        <CustomButton
+          green
+          icon={'add-shopping-cart'}
+          onPress={addToCartHandler}>
+          ADD TO CART
+        </CustomButton>
+      ),
+    [itemInCart, item],
+  );
 
   return (
     <ScrollView contentContainerStyle={styles.itemDetails}>
@@ -32,9 +63,7 @@ const ItemDetails = () => {
         <RegularText style={styles.subtitle}>Description</RegularText>
         <RegularText style={styles.text}>{description}</RegularText>
       </View>
-      <View style={styles.buttonsContainer}>
-        <CustomButton green>ADD TO CART</CustomButton>
-      </View>
+      <View style={styles.buttonsContainer}>{renderedCartButton}</View>
       <View style={styles.priceContainer}>
         <RegularText style={[styles.text, styles.price]}>${price}</RegularText>
       </View>

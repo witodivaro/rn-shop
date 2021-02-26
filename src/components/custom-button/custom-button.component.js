@@ -1,15 +1,26 @@
 import React from 'react';
 import {TouchableOpacity, StyleSheet} from 'react-native';
+import Icon from 'react-native-vector-icons/MaterialIcons';
 
 import RegularText from '../regular-text/regular-text.component';
 
-const CustomButton = ({green, style, children, ...otherProps}) => {
-  const styleProps = {green};
+const CustomButton = ({green, red, icon, style, children, ...otherProps}) => {
+  const styleProps = {green, red};
+
+  const renderedIcon = icon ? (
+    <Icon
+      style={styles.icon}
+      name={icon}
+      size={23}
+      color={getIconColor(styleProps)}
+    />
+  ) : null;
 
   return (
     <TouchableOpacity
       style={[styles.button, getButtonStyling(styleProps)]}
       {...otherProps}>
+      {renderedIcon}
       <RegularText style={[styles.text, getTextStyling(styleProps)]}>
         {children}
       </RegularText>
@@ -17,11 +28,17 @@ const CustomButton = ({green, style, children, ...otherProps}) => {
   );
 };
 
-const getButtonStyling = ({green}) => {
+const getButtonStyling = ({green, red}) => {
   if (green)
     return {
       backgroundColor: '#73a657',
       borderColor: '#73a657',
+    };
+
+  if (red)
+    return {
+      backgroundColor: '#C21807',
+      borderColor: '#c21807',
     };
 
   return {
@@ -29,8 +46,8 @@ const getButtonStyling = ({green}) => {
   };
 };
 
-const getTextStyling = ({green}) => {
-  if (green)
+const getTextStyling = ({green, red}) => {
+  if (green || red)
     return {
       color: 'white',
     };
@@ -40,6 +57,12 @@ const getTextStyling = ({green}) => {
   };
 };
 
+const getIconColor = ({green, red}) => {
+  if (green || red) return 'white';
+
+  return 'black';
+};
+
 const styles = StyleSheet.create({
   button: {
     borderWidth: 1,
@@ -47,6 +70,10 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
     borderColor: '#444',
     borderRadius: 15,
+    flexDirection: 'row',
+  },
+  icon: {
+    marginRight: 10,
   },
   text: {
     fontSize: 18,

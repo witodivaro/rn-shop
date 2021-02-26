@@ -5,13 +5,16 @@ import {View, StyleSheet, TouchableOpacity, Image} from 'react-native';
 import RegularText from '../regular-text/regular-text.component';
 import SCREENS from '../../config/screens';
 import CustomButton from '../custom-button/custom-button.component';
-import {useDispatch} from 'react-redux';
-import {addItemToCart} from '../../redux/cart/cart.actions';
+import {useDispatch, useSelector} from 'react-redux';
+import {addItemToCart, clearItemFromCart} from '../../redux/cart/cart.actions';
+import {createIsItemInCartSelector} from '../../redux/cart/cart.selectors';
+import {useMemo} from 'react';
 
 const ShopItem = ({item}) => {
   const {id, title, imageUrl, price} = item;
   const navigation = useNavigation();
   const dispatch = useDispatch();
+  const isItemInCart = useSelector(createIsItemInCartSelector(id));
 
   const navigateToDetailsHandler = () => {
     navigation.navigate(SCREENS.ItemDetails.name, {
@@ -23,6 +26,24 @@ const ShopItem = ({item}) => {
   const addToCartHandler = () => {
     dispatch(addItemToCart(item));
   };
+
+  const removeFromCartHandler = () => {
+    dispatch(clearItemFromCart(item));
+  };
+
+  const renderedCartButton = useMemo(
+    () =>
+      isItemInCart ? (
+        <CustomButton icon="check-circle" green onPress={removeFromCartHandler}>
+          ITEM ADDED
+        </CustomButton>
+      ) : (
+        <CustomButton icon="add-shopping-cart" green onPress={addToCartHandler}>
+          ADD TO CART
+        </CustomButton>
+      ),
+    [item, isItemInCart],
+  );
 
   return (
     <View style={styles.item}>
@@ -46,9 +67,7 @@ const ShopItem = ({item}) => {
           <CustomButton onPress={navigateToDetailsHandler}>
             DETAILS
           </CustomButton>
-          <CustomButton green onPress={addToCartHandler}>
-            ADD TO CART
-          </CustomButton>
+          {renderedCartButton}
         </View>
       </View>
     </View>

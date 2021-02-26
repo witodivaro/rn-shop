@@ -16,15 +16,29 @@ const RemoveButton = (props) => (
   </TouchableOpacity>
 );
 
-const IncreaseButton = (props) => (
-  <TouchableOpacity style={styles.increaseButton} {...props}>
-    <Icon name="keyboard-arrow-up" size={40} />
+const IncreaseButton = ({disabled, ...otherProps}) => (
+  <TouchableOpacity
+    style={styles.increaseButton}
+    disabled={disabled}
+    {...otherProps}>
+    <Icon
+      name="keyboard-arrow-up"
+      size={40}
+      color={disabled ? '#ccc' : 'black'}
+    />
   </TouchableOpacity>
 );
 
-const DecreaseButton = (props) => (
-  <TouchableOpacity style={styles.decreaseButton} {...props}>
-    <Icon name="keyboard-arrow-down" size={40} />
+const DecreaseButton = ({disabled, ...otherProps}) => (
+  <TouchableOpacity
+    style={styles.decreaseButton}
+    disabled={disabled}
+    {...otherProps}>
+    <Icon
+      name="keyboard-arrow-down"
+      size={40}
+      color={disabled ? '#ccc' : 'black'}
+    />
   </TouchableOpacity>
 );
 
@@ -51,7 +65,10 @@ const CartItem = ({item}) => {
         <View style={styles.quantityInfo}>
           <RegularText style={styles.quantity}>{quantity}</RegularText>
         </View>
-        <DecreaseButton onPress={decreaseButtonHandler} />
+        <DecreaseButton
+          onPress={decreaseButtonHandler}
+          disabled={quantity === 1}
+        />
       </View>
       <Image
         style={styles.image}
