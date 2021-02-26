@@ -51,11 +51,15 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   cartHeader: {
-    marginTop: 20,
     padding: 10,
+    paddingTop: 30,
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
+    backgroundColor: '#eee',
+    elevation: 5,
+    shadowOpacity: 0.26,
+    shadowRadius: 9,
   },
   price: {
     fontSize: 18,
