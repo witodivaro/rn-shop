@@ -113,7 +113,6 @@ const styles = StyleSheet.create({
   },
   cartHeader: {
     padding: 10,
-    paddingTop: 30,
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
