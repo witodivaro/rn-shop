@@ -8,7 +8,7 @@ import useInputs from '../../hooks/use-inputs';
 import {HeaderButtons, Item} from 'react-navigation-header-buttons';
 import {createProductsItemByIdSelector} from '../../redux/products/products.selectors';
 import MaterialHeaderButton from '../../components/material-header-button/material-header-button.component';
-import {changeProduct} from '../../redux/products/products.actions';
+import {addProduct, changeProduct} from '../../redux/products/products.actions';
 
 const EditProductScreen = () => {
   const route = useRoute();
@@ -17,7 +17,13 @@ const EditProductScreen = () => {
   const navigation = useNavigation();
   const dispatch = useDispatch();
 
-  const {title, price, imageUrl, description} = item;
+  const {title, imageUrl, price, description} = item || {
+    price: '',
+    imageUrl: '',
+    description: '',
+    title: '',
+  };
+
   const [inputs, onChangeText] = useInputs({
     title,
     imageUrl,
@@ -29,8 +35,17 @@ const EditProductScreen = () => {
     onChangeText(text, name);
   };
 
+  const createNumberOnlyTextChangeHandler = (name) => (text) => {
+    const formattedText = text.replace(/\D/g, '');
+    return onChangeText(formattedText, name);
+  };
+
   const saveProductHandler = () => {
-    dispatch(changeProduct(itemId, inputs));
+    if (itemId) {
+      dispatch(changeProduct(itemId, inputs));
+    } else if (itemId === null) {
+      dispatch(addProduct(inputs));
+    }
     navigation.goBack();
   };
 
@@ -44,19 +59,20 @@ const EditProductScreen = () => {
     });
   }, [inputs]);
 
+  const renderedImage = imageUrl ? (
+    <Image style={styles.image} source={{uri: imageUrl}} resizeMode="cover" />
+  ) : null;
+
   return (
     <ScrollView contentContainerStyle={styles.screen}>
       <View style={styles.preview}>
-        <Image
-          style={styles.image}
-          source={{uri: imageUrl}}
-          resizeMode="cover"
-        />
+        {renderedImage}
         <View style={styles.inputGroup}>
           <RegularText style={styles.label}>Title:</RegularText>
           <TextInput
             multiline={true}
             style={styles.textInput}
+            autoCompleteType="off"
             onChangeText={createTextChangeHandler('title')}
             value={inputs.title}
           />
@@ -66,6 +82,7 @@ const EditProductScreen = () => {
           <TextInput
             multiline={true}
             style={styles.textInput}
+            autoCompleteType="off"
             onChangeText={createTextChangeHandler('imageUrl')}
             value={inputs.imageUrl}
           />
@@ -74,7 +91,8 @@ const EditProductScreen = () => {
           <RegularText style={styles.label}>Price:</RegularText>
           <TextInput
             style={styles.textInput}
-            onChangeText={createTextChangeHandler('price')}
+            autoCompleteType="off"
+            onChangeText={createNumberOnlyTextChangeHandler('price')}
             value={inputs.price}
           />
         </View>
@@ -94,7 +112,6 @@ const EditProductScreen = () => {
 
 const styles = StyleSheet.create({
   screen: {
-    flex: 1,
     alignItems: 'center',
   },
   image: {
@@ -106,9 +123,11 @@ const styles = StyleSheet.create({
   },
   textInput: {
     borderBottomWidth: 1,
+    paddingBottom: 0,
   },
   preview: {
     paddingHorizontal: 20,
+    width: '100%',
   },
 });
 

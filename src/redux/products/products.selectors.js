@@ -15,6 +15,6 @@ export const selectProductsItemsArray = createSelector(
 
 export const createProductsItemByIdSelector = memoize((id) =>
   createSelector(selectProductsItems, (productItems) => {
-    return productItems[id];
+    return productItems[id] || null;
   }),
 );

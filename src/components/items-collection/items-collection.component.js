@@ -12,11 +12,12 @@ const renderShopItem = (item, editable) => {
 
 const ItemsCollection = ({editable}) => {
   const products = useSelector(selectProductsItemsArray);
+  const reversedProducts = products.slice().reverse();
 
   return (
     <View style={styles.itemsCollection}>
       <FlatList
-        data={products}
+        data={reversedProducts}
         renderItem={({item}) => renderShopItem(item, editable)}
         keyExtractor={(item) => item.id.toString()}
       />

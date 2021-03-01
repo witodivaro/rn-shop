@@ -15,3 +15,16 @@ export const deleteProduct = (products, productToDeleteId) => {
 
   return copiedProducts;
 };
+
+export const addProduct = (products, productToAdd) => {
+  console.log(productToAdd);
+  const newProductId = Object.keys(products).length;
+
+  if (!productToAdd.imageUrl) {
+    productToAdd.imageUrl = 'https://i.stack.imgur.com/y9DpT.jpg';
+  }
+
+  return Object.assign({}, products, {
+    [newProductId]: {id: newProductId, ...productToAdd},
+  });
+};
