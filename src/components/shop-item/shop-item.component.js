@@ -9,6 +9,7 @@ import {useDispatch, useSelector} from 'react-redux';
 import {addItemToCart, clearItemFromCart} from '../../redux/cart/cart.actions';
 import {createIsItemInCartSelector} from '../../redux/cart/cart.selectors';
 import {useMemo} from 'react';
+import {deleteProduct} from '../../redux/products/products.actions';
 
 const ShopItem = ({item, editable}) => {
   const {id, title, imageUrl, price} = item;
@@ -37,7 +38,9 @@ const ShopItem = ({item, editable}) => {
     });
   };
 
-  const deleteHandler = () => {};
+  const deleteHandler = () => {
+    dispatch(deleteProduct(id));
+  };
 
   const renderedCartButton = useMemo(
     () =>

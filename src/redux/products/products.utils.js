@@ -7,3 +7,11 @@ export const changeProduct = (products, changedProduct) => {
     },
   };
 };
+
+export const deleteProduct = (products, productToDeleteId) => {
+  const copiedProducts = Object.assign({}, products);
+
+  delete copiedProducts[productToDeleteId];
+
+  return copiedProducts;
+};
