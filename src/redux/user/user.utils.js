@@ -1,1 +1,4 @@
-export const identifyOrder = (order) => ({...order, id: new Date().toString()});
+export const identifyOrder = (order) => ({
+  ...order,
+  id: new Date().getTime().toString(),
+});
