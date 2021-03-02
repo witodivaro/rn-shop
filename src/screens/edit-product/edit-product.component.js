@@ -108,7 +108,7 @@ const EditProductScreen = () => {
         <CustomInput
           id="title"
           label="Title"
-          initialValue={item.title ? item.title : ''}
+          initialValue={item?.title || ''}
           initialValidity={!!item}
           onInputChange={inputChangeHandler}
           required
@@ -119,7 +119,7 @@ const EditProductScreen = () => {
           label="Image URL"
           multiline
           autoCompleteType="off"
-          initialValue={item.imageUrl ? item.imageUrl : ''}
+          initialValue={item?.imageUrl || ''}
           initialValidity={!!item}
           onInputChange={inputChangeHandler}
           required
@@ -130,7 +130,7 @@ const EditProductScreen = () => {
           label="Price"
           autoCompleteType="off"
           keyboardType="decimal-pad"
-          initialValue={item.price ? item.price.toString() : '0'}
+          initialValue={item?.price ? item.price.toString() : '0'}
           initialValidity={!!item}
           onInputChange={inputChangeHandler}
           min={0}
@@ -141,7 +141,7 @@ const EditProductScreen = () => {
           id="description"
           label="Description"
           multiline={true}
-          initialValue={item.description ? item.description : ''}
+          initialValue={item?.description || ''}
           initialValidity={!!item}
           onInputChange={inputChangeHandler}
           required
