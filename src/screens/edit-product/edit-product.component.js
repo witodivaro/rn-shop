@@ -1,7 +1,13 @@
 import React, {useEffect, useReducer} from 'react';
 import {useNavigation, useRoute} from '@react-navigation/native';
-import {Image, StyleSheet, View} from 'react-native';
-import {ScrollView} from 'react-native-gesture-handler';
+import {
+  Image,
+  StyleSheet,
+  View,
+  ScrollView,
+  KeyboardAvoidingView,
+  Platform,
+} from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
 import {HeaderButtons, Item} from 'react-navigation-header-buttons';
 import {createProductsItemByIdSelector} from '../../redux/products/products.selectors';
@@ -102,54 +108,65 @@ const EditProductScreen = () => {
     ) : null;
 
   return (
-    <ScrollView contentContainerStyle={styles.screen}>
-      <View style={styles.preview}>
-        {renderedImage}
-        <CustomInput
-          id="title"
-          label="Title"
-          initialValue={item?.title || ''}
-          initialValidity={!!item}
-          onInputChange={inputChangeHandler}
-          required
-          error="Input valid title"
-        />
-        <CustomInput
-          id="imageUrl"
-          label="Image URL"
-          multiline
-          autoCompleteType="off"
-          initialValue={item?.imageUrl || ''}
-          initialValidity={!!item}
-          onInputChange={inputChangeHandler}
-          required
-          error="Input valid image url"
-        />
-        <CustomInput
-          id="price"
-          label="Price"
-          autoCompleteType="off"
-          keyboardType="decimal-pad"
-          initialValue={item?.price ? item.price.toString() : '0'}
-          initialValidity={!!item}
-          onInputChange={inputChangeHandler}
-          min={0}
-          required
-          error="Input valid price"
-        />
-        <CustomInput
-          id="description"
-          label="Description"
-          multiline={true}
-          initialValue={item?.description || ''}
-          initialValidity={!!item}
-          onInputChange={inputChangeHandler}
-          required
-          minLength={5}
-          error="Input valid description"
-        />
-      </View>
-    </ScrollView>
+    <KeyboardAvoidingView
+      style={{
+        flex: 1,
+      }}
+      {...Platform.select({
+        ios: {
+          behavior: 'padding',
+          keyboardVerticalOffset: 100,
+        },
+      })}>
+      <ScrollView contentContainerStyle={styles.screen}>
+        <View style={styles.preview}>
+          {renderedImage}
+          <CustomInput
+            id="title"
+            label="Title"
+            initialValue={item?.title || ''}
+            initialValidity={!!item}
+            onInputChange={inputChangeHandler}
+            required
+            error="Input valid title"
+          />
+          <CustomInput
+            id="imageUrl"
+            label="Image URL"
+            multiline
+            autoCompleteType="off"
+            initialValue={item?.imageUrl || ''}
+            initialValidity={!!item}
+            onInputChange={inputChangeHandler}
+            required
+            error="Input valid image url"
+          />
+          <CustomInput
+            id="price"
+            label="Price"
+            autoCompleteType="off"
+            keyboardType="decimal-pad"
+            initialValue={item?.price ? item.price.toString() : '0'}
+            initialValidity={!!item}
+            onInputChange={inputChangeHandler}
+            min={0}
+            required
+            error="Input valid price"
+          />
+          <CustomInput
+            id="description"
+            label="Description"
+            multiline={true}
+            initialValue={item?.description || ''}
+            initialValidity={!!item}
+            onInputChange={inputChangeHandler}
+            required
+            minLength={5}
+            error="Input valid description"
+          />
+        </View>
+      </ScrollView>
+    </KeyboardAvoidingView>
   );
 };
 
