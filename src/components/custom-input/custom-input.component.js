@@ -75,9 +75,10 @@ const CustomInput = (props) => {
     });
   }, [dispatchInputState]);
 
-  const renderedError = inputState.isValid ? null : (
-    <RegularText style={styles.error}>{props.error}</RegularText>
-  );
+  const renderedError =
+    inputState.isValid || !inputState.touched ? null : (
+      <RegularText style={styles.error}>{props.error}</RegularText>
+    );
   return (
     <View style={styles.inputGroup}>
       <RegularText style={styles.label}>{props.label}:</RegularText>
@@ -100,6 +101,11 @@ const styles = StyleSheet.create({
   textInput: {
     borderBottomWidth: 1,
     paddingBottom: 0,
+  },
+  error: {
+    textAlign: 'right',
+    marginTop: 5,
+    color: 'rgb(200, 0, 0)',
   },
 });
 
