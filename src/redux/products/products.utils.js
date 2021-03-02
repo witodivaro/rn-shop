@@ -17,7 +17,6 @@ export const deleteProduct = (products, productToDeleteId) => {
 };
 
 export const addProduct = (products, productToAdd) => {
-  console.log(productToAdd);
   const newProductId = Object.keys(products).length;
 
   if (!productToAdd.imageUrl) {
