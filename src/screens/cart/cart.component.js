@@ -1,7 +1,5 @@
-import React from 'react';
-import {useState} from 'react';
-import {StyleSheet, View} from 'react-native';
-import {FlatList} from 'react-native-gesture-handler';
+import React, {useState, useMemo} from 'react';
+import {StyleSheet, View, FlatList} from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
 import CartItem from '../../components/cart-item/cart-item.component';
 import CustomButton from '../../components/custom-button/custom-button.component';
@@ -14,7 +12,6 @@ import {
 } from '../../redux/cart/cart.selectors';
 import {addUserOrder} from '../../redux/user/user.actions';
 import {clearCart} from '../../redux/cart/cart.actions';
-import {useMemo} from 'react';
 import {useNavigation} from '@react-navigation/native';
 import {STACK_NAVIGATORS} from '../../config/navigators';
 

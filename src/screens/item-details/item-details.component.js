@@ -10,7 +10,6 @@ import CustomButton from '../../components/custom-button/custom-button.component
 import {addItemToCart, clearItemFromCart} from '../../redux/cart/cart.actions';
 import {createIsItemInCartSelector} from '../../redux/cart/cart.selectors';
 import {useMemo} from 'react';
-import Icon from 'react-native-vector-icons/MaterialIcons';
 
 const ItemDetails = () => {
   const route = useRoute();

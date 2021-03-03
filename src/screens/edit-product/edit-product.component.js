@@ -1,4 +1,4 @@
-import React, {useEffect, useReducer} from 'react';
+import React, {useEffect, useReducer, useCallback} from 'react';
 import {useNavigation, useRoute} from '@react-navigation/native';
 import {
   Image,
@@ -14,7 +14,6 @@ import {createProductsItemByIdSelector} from '../../redux/products/products.sele
 import MaterialHeaderButton from '../../components/material-header-button/material-header-button.component';
 import {addProduct, changeProduct} from '../../redux/products/products.actions';
 import CustomInput from '../../components/custom-input/custom-input.component';
-import {useCallback} from 'react';
 
 const FORM_INPUT_UPDATE = 'FORM_INPUT_UPDATE';
 

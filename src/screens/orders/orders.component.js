@@ -1,7 +1,6 @@
-import React from 'react';
+import React, {useMemo} from 'react';
 import {View, StyleSheet, FlatList} from 'react-native';
 import {useSelector} from 'react-redux';
-import {useMemo} from 'react/cjs/react.development';
 
 import OrderItem from '../../components/order/order.component';
 import RegularText from '../../components/regular-text/regular-text.component';
