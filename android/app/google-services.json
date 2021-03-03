@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "418733673688",
+    "project_id": "rn-shop-dff60",
+    "storage_bucket": "rn-shop-dff60.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:418733673688:android:c4cb09cef111a8dda1dbad",
+        "android_client_info": {
+          "package_name": "com.rnshop"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "418733673688-nfrdlnnhsc3beneqf81ilsojp61nmf0e.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBhbAjBL-w3wsl0sBEbn81ksKpbIwH6vu0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "418733673688-nfrdlnnhsc3beneqf81ilsojp61nmf0e.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "418733673688-1rjmg5uujk9u3dul3tdbca9fv03utprv.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "org.reactjs.native.example.RNShop"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
