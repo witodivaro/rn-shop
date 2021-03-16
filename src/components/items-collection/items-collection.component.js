@@ -1,6 +1,7 @@
-import React from 'react';
-import {View, FlatList, StyleSheet} from 'react-native';
-import {useSelector} from 'react-redux';
+import React, {useState, useEffect} from 'react';
+import {View, FlatList, StyleSheet, ActivityIndicator} from 'react-native';
+import {useDispatch, useSelector} from 'react-redux';
+import {fetchItemsStart} from '../../redux/products/products.actions';
 
 import {selectProductsItemsArray} from '../../redux/products/products.selectors';
 
@@ -11,8 +12,31 @@ const renderShopItem = (item, editable) => {
 };
 
 const ItemsCollection = ({editable}) => {
+  const dispatch = useDispatch();
+  const [isLoading, setIsLoading] = useState(true);
   const products = useSelector(selectProductsItemsArray);
   const reversedProducts = products.slice().reverse();
+
+  useEffect(() => {
+    const fetchItems = () => {
+      dispatch(fetchItemsStart());
+
+      setIsLoading(false);
+    };
+
+    fetchItems();
+  }, []);
+
+  if (isLoading) {
+    return (
+      <ActivityIndicator
+        size="large"
+        style={{
+          flex: 1,
+        }}
+      />
+    );
+  }
 
   return (
     <View style={styles.itemsCollection}>

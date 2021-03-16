@@ -1,9 +1,8 @@
-import PRODUCTS_MOCK from './products.mock-data';
 import ProductsActionTypes from './products.types';
 import {addProduct, changeProduct, deleteProduct} from './products.utils';
 
 const initialState = {
-  items: PRODUCTS_MOCK,
+  items: [],
 };
 
 const productsReducer = (state = initialState, {type, payload}) => {
@@ -24,6 +23,12 @@ const productsReducer = (state = initialState, {type, payload}) => {
       return {
         ...state,
         items: addProduct(state.items, payload),
+      };
+
+    case ProductsActionTypes.FETCH_ITEMS_SUCCESS:
+      return {
+        ...state,
+        items: payload,
       };
 
     default:

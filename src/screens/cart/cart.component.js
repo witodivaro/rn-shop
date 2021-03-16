@@ -4,7 +4,6 @@ import {useDispatch, useSelector} from 'react-redux';
 import CartItem from '../../components/cart-item/cart-item.component';
 import CustomButton from '../../components/custom-button/custom-button.component';
 import CenteredModal from '../../components/centered-modal/centered-modal';
-
 import RegularText from '../../components/regular-text/regular-text.component';
 import {
   selectCartItems,

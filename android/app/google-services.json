@@ -1,40 +1,40 @@
 {
   "project_info": {
-    "project_number": "418733673688",
-    "project_id": "rn-shop-dff60",
-    "storage_bucket": "rn-shop-dff60.appspot.com"
+    "project_number": "528270997779",
+    "project_id": "wd-rn-shop",
+    "storage_bucket": "wd-rn-shop.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:418733673688:android:c4cb09cef111a8dda1dbad",
+        "mobilesdk_app_id": "1:528270997779:android:864da224a991bf762342e6",
         "android_client_info": {
           "package_name": "com.rnshop"
         }
       },
       "oauth_client": [
         {
-          "client_id": "418733673688-nfrdlnnhsc3beneqf81ilsojp61nmf0e.apps.googleusercontent.com",
+          "client_id": "528270997779-191evv33ubvnrngqkphnc1gn5rr8lt0u.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyBhbAjBL-w3wsl0sBEbn81ksKpbIwH6vu0"
+          "current_key": "AIzaSyDUKBgrg8pxl38seCkM73ORD7W5tWF9MBE"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "418733673688-nfrdlnnhsc3beneqf81ilsojp61nmf0e.apps.googleusercontent.com",
+              "client_id": "528270997779-191evv33ubvnrngqkphnc1gn5rr8lt0u.apps.googleusercontent.com",
               "client_type": 3
             },
             {
-              "client_id": "418733673688-1rjmg5uujk9u3dul3tdbca9fv03utprv.apps.googleusercontent.com",
+              "client_id": "528270997779-o94csd4mbd88muac9ovoq3c7is988vl3.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "org.reactjs.native.example.RNShop"
+                "bundle_id": "com.itechart.rnshop"
               }
             }
           ]
